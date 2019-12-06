@@ -43,6 +43,7 @@ def trans_table(src_table, dst_table):
         sql = "insert into {} select * from {}".format(dst_table, src_table)
         log.info("开始从{}复制数据至{}".format(src_table, dst_table))
         cursor.execute(sql)
+        con.commit()
     except Exception as e:
         log.info("执行异常")
         log.exception(e)
@@ -55,3 +56,6 @@ for t in tables:
     src_table = "test.{}".format(t)
     dst_table = "data.Group"
     trans_table(src_table, dst_table)
+cursor.close()
+con.close()
+log.info("数据迁移完成,连接已关闭")
