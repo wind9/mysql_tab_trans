@@ -25,7 +25,7 @@ def get_log(log_path):
 def get_src_tables():
     tables = []
     try:
-        sql = "select table_name from information_schema.tables where table_schema='test' and table_name like 'QunList%'"
+        sql = "select table_name from information_schema.tables where table_schema='test' and table_name like 'Group%'"
         log.info("执行SQL:{}".format(sql))
         cursor.execute(sql)
         result = cursor.fetchall()
@@ -54,7 +54,7 @@ log.info("测试log")
 tables = get_src_tables()
 for t in tables:
     src_table = "test.{}".format(t)
-    dst_table = "data.QunList"
+    dst_table = "data.Group"
     trans_table(src_table, dst_table)
 cursor.close()
 con.close()
